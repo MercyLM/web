@@ -1,870 +1,349 @@
-//第一層
-$(document).ready(function(){    
-    $("#body").addClass("style");
+function levelFunction(){
+    var level = document.getElementById("level").selectedIndex; 
+    var lv = document.getElementsByTagName("option")[level].value; //level的value指向 lv
     
-    $("footer").text("作者：MercyLM # 請勿盜用");
+    if (level == 0){
+        $("#level").addClass("warning"); //錯誤時顏色警示
+    }else {
+        $("#level").removeClass("warning"); //正確時顏色清除
+    }
     
-    $("#body").append("<div id = 'top'></div>");
-    $("#body").append("<div id = 'bottom'></div>");
-
-    topFuntion();
-    bottomFuntion();
-});
-
-//第二層
-function topFuntion(){
-    $("#top").addClass("style");
+    typeFunction(lv);
+}
+function typeFunction(lv){
+    var type = document.getElementById("type").selectedIndex;
+    var tp = document.getElementsByTagName("option")[type + level.length].value; //type的value指向 tp
     
-    $("#top").append("<P>使用說明：</p>");
-    $("#top").append("<P>請先點選是幾級的裝備，就會顯示屬性！</p>");
-    $("#top").append("<P>基礎材料部分尚未齊全，之後會更新！(0715)</p>");
-};
-
-function bottomFuntion(){
-    $("#bottom").addClass("style");
-    
-    $("#bottom").append("<div id = 'bottom-topBox'></div>");
-    $("#bottom").append("<div id = 'bottom-btmBox'></div>");
-    
-    topBoxFuntion();
-    btmBoxFuntion();
-};
-
-//第三層
-function topBoxFuntion(){
-    $("#bottom-topBox").addClass("style");
-    
-    $("#bottom-topBox").append("<button id = 'level_20'>20級裝備</button>");
-    $("#bottom-topBox").append("<button id = 'level_30'>30級裝備</button>");
-    $("#bottom-topBox").append("<button id = 'level_40'>40級裝備</button><br>");
-    $("#bottom-topBox").append("<button id = 'type_1' class = 'type'>純力</button>");
-    $("#bottom-topBox").append("<button id = 'type_2' class = 'type'>純智</button>");
-    $("#bottom-topBox").append("<button id = 'type_3' class = 'type'>純敏</button>");
-    $("#bottom-topBox").append("<button id = 'type_4' class = 'type'>力智</button>");
-    $("#bottom-topBox").append("<button id = 'type_5' class = 'type'>智敏</button>");
-    $("#bottom-topBox").append("<button id = 'type_6' class = 'type'>力敏</button>");
-
-    btn();
-};
-
-function btmBoxFuntion(){
-    $("#bottom-btmBox").addClass("style");
-};
-
-//第四層
-function btn(){
-    $("#bottom-topBox button").addClass("style");
-    $("#bottom-topBox .type").hide();
-    $("#bottom-topBox #change").hide();
-    
-    //- - - - - 20級製作裝 - - - - - 
-    var level20_type1_1 = '{"type1":[' +//純力
-        '{"name":"鍛鐵盾","item1":"鍛鐵板片3個","item2":"煤礦2個","item3":"","item4":"","item5":""},'+//副手
-        '{"name":"烏鐵戰帽","item1":"鍛鐵板片1個","item2":"鑄鐵鎧罩1個","item3":"烏鐵石1個","item4":"煤礦2個","item5":""},'+//頭盔
-        '{"name":"烏鐵戰甲","item1":"鍛鐵板片4個","item2":"鑄鐵鎧甲1個","item3":"烏鐵石1個","item4":"煤礦2個","item5":""},'+//衣服              
-        '{"name":"烏鐵褲鎧","item1":"鍛鐵板片2個","item2":"鑄鐵鎧褲1個","item3":"烏鐵石1個","item4":"煤礦2個","item5":""},'+//褲子              
-        '{"name":"烏鐵戰靴","item1":"鍛鐵板片1個","item2":"鑄鐵脛甲1個","item3":"烏鐵石1個","item4":"煤礦2個","item5":""}]}';//鞋子            
-    var level20_type1_2 = '{"type1":[' +//純力               
-        '{"name":"鍛鐵盾","item1":"粗鐵礦4個","item2":"煤礦6個","item3":"","item4":"","item5":""},'+//副手               
-        '{"name":"烏鐵戰帽","item1":"粗鐵礦2個","item2":"烏鐵石碎片10個","item3":"煤礦5個","item4":"鑄鐵鎧罩1個","item5":""},'+//頭盔               
-        '{"name":"烏鐵戰甲","item1":"粗鐵礦4個","item2":"烏鐵石碎片10個","item3":"煤礦7個","item4":"鑄鐵鎧甲1個","item5":""},'+//衣服                
-        '{"name":"烏鐵褲鎧","item1":"粗鐵礦2個","item2":"烏鐵石碎片10個","item3":"煤礦5個","item4":"鑄鐵鎧褲1個","item5":""},'+//褲子                
-        '{"name":"烏鐵戰靴","item1":"粗鐵礦2個","item2":"烏鐵石碎片10個","item3":"煤礦5個","item4":"鑄鐵脛甲1個","item5":""}]}';//鞋子
-    var level20_type2_1 = '{"type2":[' +//純智
-        '{"name":"能量札記","item1":"皮革2個","item2":"木質紙100個","item3":"魔法石2個","item4":"堅韌的線團2個","item5":""},'+//副手                
-        '{"name":"巫士法帽","item1":"綢緞1個","item2":"巫徒之冠1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//頭盔                
-        '{"name":"巫士法袍","item1":"綢緞4個","item2":"巫徒披肩1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//衣服                
-        '{"name":"巫士護褲","item1":"綢緞3個","item2":"巫徒護褲1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//褲子                
-        '{"name":"巫士尖靴","item1":"綢緞2個","item2":"巫士法靴1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""}]}';//鞋子            
-    var level20_type2_2 = '{"type2":[' +//純智                
-        '{"name":"能量札記","item1":"普通的獸皮4個","item2":"堅韌的蛛絲囊4個","item3":"受損的蛛絲囊16個","item4":"木質紙100個","item5":"魔法石2個","item6":""},'+//副手    
-        '{"name":"巫士法帽","item1":"堅韌的蛛絲囊6個","item2":"受損的蛛絲囊18個","item3":"魔法石2個","item4":"巫徒之冠1個","item5":"傑爾特的唾絲1個","item6":"剪刀1個"},'+//頭盔  
-        '{"name":"巫士法袍","item1":"堅韌的蛛絲囊14個","item2":"受損的蛛絲囊42個","item3":"魔法石8個","item4":"巫徒披肩1個","item5":"傑爾特的唾絲1個","item6":"剪刀1個"},'+//衣服                
-        '{"name":"巫士護褲","item1":"堅韌的蛛絲囊12個","item2":"受損的蛛絲囊36個","item3":"魔法石6個","item4":"巫徒護褲1個","item5":"傑爾特的唾絲1個","item6":"剪刀1個"},'+//褲子                
-        '{"name":"巫世尖靴","item1":"堅韌的蛛絲囊8個","item2":"受損的蛛絲囊24個","item3":"魔法石4個","item4":"巫士法靴1個","item5":"傑爾特的唾絲1個","item6":"剪刀1個"}]}';//鞋子
-    var level20_type3_1 = '{"type3":[' +//純敏
-        '{"name":"輕皮盾","item1":"皮革3個","item2":"堅韌的線團2個","item3":"","item4":"","item5":""},'+//副手
-        '{"name":"夜獸影帽","item1":"皮革3個","item2":"野獸戰帽1個","item3":"剪刀1個","item4":"","item5":""},'+//頭盔
-        '{"name":"夜獸影甲","item1":"野獸大衫1個","item2":"野性皮革2個","item3":"剪刀1個","item4":"","item5":""},'+//衣服
-        '{"name":"夜獸影褲","item1":"皮革4個","item2":"野獸旅褲1個","item3":"野性皮革1個","item4":"剪刀1個","item5":""},'+//褲子
-        '{"name":"夜獸影靴","item1":"皮革3個","item2":"野獸旅靴1個","item3":"野性皮革1個","item4":"剪刀1個","item5":""}]}';//鞋子
-    var level20_type3_2 = '{"type3":[' +//純敏
-        '{"name":"輕皮盾","item1":"完整的獸皮3個","item2":"受損的蛛絲囊12個","item3":"堅韌的蛛絲囊4個","item4":"","item5":"","item6":""},'+//副手
-        '{"name":"夜獸影帽","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮4個","item4":"凡狼皮1個","item5":"剪刀1個","item6":"野獸戰帽1個"},'+//頭盔
-        '{"name":"夜獸影甲","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮4個","item4":"凡狼皮2個","item5":"剪刀1個","item6":"野獸大衫1個"},'+//衣服
-        '{"name":"夜獸影褲","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮4個","item4":"凡狼皮1個","item5":"剪刀1個","item6":"野獸旅褲1個"},'+//褲子
-        '{"name":"夜獸影靴","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮4個","item4":"凡狼皮1個","item5":"剪刀1個","item6":"野獸旅靴1個"}]}';//鞋子
-    var level20_type4_1 = '{"type4":[' +//力智
-        '{"name":"烏銀護帽","item1":"輕鐵板片1個","item2":"網紋護帽1個","item3":"魔性綢緞1個","item4":"煤礦2個","item5":""},'+//副手
-        '{"name":"烏銀大衫","item1":"輕鐵板片4個","item2":"網紋行甲1個","item3":"魔性綢緞1個","item4":"煤礦2個","item5":""},'+//頭盔
-        '{"name":"烏銀鍛褲","item1":"輕鐵板片2個","item2":"網紋旅褲1個","item3":"魔性綢緞1個","item4":"煤礦2個","item5":""},'+//衣服
-        '{"name":"烏銀長靴","item1":"輕鐵板片1個","item2":"網紋長靴1個","item3":"魔性綢緞1個","item4":"煤礦2個","item5":""},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level20_type4_2 = '{"type4":[' +//力智
-        '{"name":"烏銀護帽","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"受損的蛛絲囊12個","item4":"堅韌的蛛絲囊4個","item5":"傑爾特的唾絲1個","item6":"網紋護帽1個"},'+//副手
-        '{"name":"烏銀大衫","item1":"粗鐵礦4個","item2":"煤礦6個","item3":"受損的蛛絲囊12個","item4":"堅韌的蛛絲囊4個","item5":"傑爾特的唾絲1個","item6":"網紋行甲1個"},'+//頭盔
-        '{"name":"烏銀鍛褲","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"受損的蛛絲囊12個","item4":"堅韌的蛛絲囊4個","item5":"傑爾特的唾絲1個","item6":"網紋旅褲1個"},'+//衣服
-        '{"name":"烏銀長靴","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"受損的蛛絲囊12個","item4":"堅韌的蛛絲囊4個","item5":"傑爾特的唾絲1個","item6":"網紋長靴1個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":""}]}';//鞋子
-    var level20_type5_1 = '{"type5":[' +//智敏
-        '{"name":"魔紋旅帽","item1":"皮革1個","item2":"青絲護面1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//副手
-        '{"name":"魔紋風衣","item1":"皮革4個","item2":"青絲旅帽1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//頭盔
-        '{"name":"魔紋旅褲","item1":"皮革1個","item2":"青絲旅褲1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//衣服
-        '{"name":"魔紋旅靴","item1":"皮革2個","item2":"青絲長靴1個","item3":"魔性綢緞1個","item4":"剪刀1個","item5":""},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level20_type5_2 = '{"type5":[' +//智敏
-        '{"name":"魔紋旅帽","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮1個","item4":"傑爾特的唾絲1個","item5":"剪刀1個","item6":"青絲護面1個"},'+//副手
-        '{"name":"魔紋風衣","item1":"受損的蛛絲囊18個","item2":"堅韌的蛛絲囊6個","item3":"完整的獸皮4個","item4":"傑爾特的唾絲1個","item5":"剪刀1個","item6":"青絲旅帽1個"},'+//頭盔
-        '{"name":"魔紋旅褲","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮1個","item4":"傑爾特的唾絲1個","item5":"剪刀1個","item6":"青絲旅褲1個"},'+//衣服
-        '{"name":"魔紋旅靴","item1":"受損的蛛絲囊12個","item2":"堅韌的蛛絲囊4個","item3":"完整的獸皮2個","item4":"傑爾特的唾絲1個","item5":"剪刀1個","item6":"青絲長靴1個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":""}]}';//鞋子
-    var level20_type6_1 = '{"type6":[' +//力敏
-        '{"name":"輕鐵盾","item1":"輕鐵板片2個","item2":"皮革1個","item3":"煤礦2個","item4":"","item5":""},'+//副手
-        '{"name":"烏鐵輕盔","item1":"輕鐵板片1個","item2":"輕鐵護面1個","item3":"堅硬外殼2個","item4":"烏鐵石碎片3個","item5":"煤礦2個"},'+//頭盔
-        '{"name":"烏鐵鱗甲","item1":"輕鐵板片3個","item2":"輕鐵胸甲1個","item3":"堅硬外殼5個","item4":"烏鐵石碎片5個","item5":"煤礦2個"},'+//衣服
-        '{"name":"烏鐵護腿","item1":"輕鐵板片2個","item2":"輕鐵護褲1個","item3":"堅硬外殼4個","item4":"烏鐵石碎片4個","item5":"煤礦2個"},'+//褲子
-        '{"name":"烏鐵輕靴","item1":"輕鐵板片1個","item2":"輕鐵馬靴1個","item3":"堅硬外殼2個","item4":"烏鐵石碎片3個","item5":"煤礦2個"}]}';//鞋子
-    var level20_type6_2 = '{"type6":[' +//力敏
-        '{"name":"輕鐵盾","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"完整的獸皮1個","item4":"受損的蛛絲囊6個","item5":"堅韌的蛛絲囊2個"},'+//副手
-        '{"name":"烏鐵輕盔","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"烏鐵石碎片3個","item4":"堅硬外殼2個","item5":"輕鐵護面1個"},'+//頭盔
-        '{"name":"烏鐵鱗甲","item1":"粗鐵礦4個","item2":"煤礦6個","item3":"烏鐵石碎片5個","item4":"堅硬外殼5個","item5":"輕鐵胸甲1個"},'+//衣服
-        '{"name":"烏鐵護腿","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"烏鐵石碎片4個","item4":"堅硬外殼4個","item5":"輕鐵護褲1個"},'+//褲子
-        '{"name":"烏鐵輕靴","item1":"粗鐵礦2個","item2":"煤礦4個","item3":"烏鐵石碎片3個","item4":"堅硬外殼2個","item5":"輕鐵馬靴1個"}]}';//鞋子
-    //- - - - - 30級製作裝 - - - - -
-    var level30_type1_1 = '{"type1":[' +//純力
-        '{"name":"烏鋼盾","item1":"鍛鐵板片3個","item2":"烏鐵石4個","item3":"煤礦4個","item4":"妖魔獠牙圖騰2個","item5":""},'+//副手
-        '{"name":"妖魔戰鬥面甲","item1":"鍛鐵板片3個","item2":"烏鐵戰帽1個","item3":"烏鐵石4個","item4":"妖魔鎧甲碎片3個","item5":"煤礦4個"},'+//頭盔
-        '{"name":"妖魔戰鬥鎧甲","item1":"鍛鐵板片6個","item2":"烏鐵戰甲1個","item3":"烏鐵石6個","item4":"妖魔鎧甲碎片3個","item5":"煤礦4個"},'+//衣服
-        '{"name":"妖魔戰鬥褲鎧","item1":"鍛鐵板片5個","item2":"烏鐵褲鎧1個","item3":"烏鐵石5個","item4":"妖魔鎧甲碎片3個","item5":"煤礦4個"},'+//褲子
-        '{"name":"妖魔戰鬥戰靴","item1":"鍛鐵板片3個","item2":"烏鐵戰靴1個","item3":"烏鐵石3個","item4":"妖魔鎧甲碎片3個","item5":"煤礦2個"}]}';//鞋子
-    var level30_type1_2 = '{"type1":[' +//純力
-        '{"name":"烏鋼盾","item1":"粗鐵礦4個","item2":"煤礦10個","item3":"烏鐵石碎片20個","item4":"妖魔獠牙圖騰2個","item5":""},'+//副手
-        '{"name":"妖魔戰鬥面甲","item1":"粗鐵礦4個","item2":"煤礦10個","item3":"烏鐵石碎片20個","item4":"妖魔鎧甲碎片3個","item5":"烏鐵戰帽1個"},'+//頭盔
-        '{"name":"妖魔戰鬥鎧甲","item1":"粗鐵礦6個","item2":"煤礦13個","item3":"烏鐵石碎片30個","item4":"妖魔鎧甲碎片3個","item5":"烏鐵戰甲1個"},'+//衣服
-        '{"name":"妖魔戰鬥褲鎧","item1":"粗鐵礦6個","item2":"煤礦13個","item3":"烏鐵石碎片30個","item4":"妖魔鎧甲碎片3個","item5":"烏鐵褲鎧1個"},'+//褲子
-        '{"name":"妖魔戰鬥戰靴","item1":"粗鐵礦4個","item2":"煤礦8個","item3":"烏鐵石碎片20個","item4":"妖魔鎧甲碎片3個","item5":"烏鐵戰靴1個"}]}';//鞋子
-    var level30_type2_1 = '{"type2":[' +//純智
-        '{"name":"風暴之書","item1":"皮革4個","item2":"木紋紙100個","item3":"轉印石4個","item4":"堅韌的線團3個","item5":"妖魔獠牙圖騰2個"},'+//副手
-        '{"name":"妖魔咒術之帽","item1":"巫士法帽1個","item2":"綢緞1個","item3":"魔性綢緞4個","item4":"妖魔咒術碎片3個","item5":"烏鐵剪1個"},'+//頭盔
-        '{"name":"妖魔咒術法袍","item1":"巫士法袍1個","item2":"綢緞2個","item3":"魔性綢緞6個","item4":"妖魔咒術碎片3個","item5":"烏鐵剪1個"},'+//衣服
-        '{"name":"妖魔咒術護褲","item1":"巫士護褲1個","item2":"綢緞2個","item3":"魔性綢緞5個","item4":"妖魔咒術碎片3個","item5":"烏鐵剪1個"},'+//褲子
-        '{"name":"妖魔咒術尖靴","item1":"巫士尖靴1個","item2":"綢緞1個","item3":"魔性綢緞4個","item4":"妖魔咒術碎片3個","item5":"烏鐵剪1個"}]}';//鞋子
-    var level30_type2_2 = '{"type2":[' +//純智
-        '{"name":"風暴之書","item1":"橡木原木40個","item2":"轉印石4個","item3":"完整的獸皮4個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"妖魔獠牙圖騰2個","item7":"","item8":"","item9":""},'+//副手
-        '{"name":"妖魔咒術之帽","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊42個","item5":"堅韌的蛛絲囊14個","item6":"傑爾特的唾絲4個","item7":"魔法石2個","item8":"妖魔咒術碎片3個","item9":"巫士法帽1個"},'+//頭盔
-        '{"name":"妖魔咒術法袍","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊66個","item5":"堅韌的蛛絲囊22個","item6":"傑爾特的唾絲6個","item7":"魔法石4個","item8":"妖魔咒術碎片3個","item9":"巫士法袍1個"},'+//衣服
-        '{"name":"妖魔咒術護褲","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊60個","item5":"堅韌的蛛絲囊20個","item6":"傑爾特的唾絲5個","item7":"魔法石4個","item8":"妖魔咒術碎片3個","item9":"巫士護褲1個"},'+//褲子
-        '{"name":"妖魔咒術尖靴","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊42個","item5":"堅韌的蛛絲囊14個","item6":"傑爾特的唾絲4個","item7":"魔法石2個","item8":"妖魔咒術碎片3個","item9":"巫士尖靴1個"}]}';//鞋子
-    var level30_type3_1 = '{"type3":[' +//純敏
-        '{"name":"妖魔狙殺箭袋","item1":"野性皮革2個","item2":"烏鐵石2個","item3":"妖魔狙殺圖騰2個","item4":"烏鐵剪1個","item5":""},'+//箭袋
-        '{"name":"妖魔盾","item1":"野性皮革2個","item2":"烏鐵石2個","item3":"煤礦4個","item4":"妖魔獠牙圖騰2個","item5":""},'+//副手
-        '{"name":"妖魔夜行面具","item1":"夜獸影帽1個","item2":"野性皮革3個","item3":"妖魔夜行碎片3個","item4":"烏鐵剪1個","item5":""},'+//頭盔
-        '{"name":"妖魔夜行影甲","item1":"夜獸影甲1個","item2":"野性皮革5個","item3":"妖魔夜行碎片3個","item4":"烏鐵剪1個","item5":""},'+//衣服
-        '{"name":"妖魔夜行影褲","item1":"夜獸影褲1個","item2":"野性皮革5個","item3":"妖魔夜行碎片3個","item4":"烏鐵剪1個","item5":""},'+//褲子
-        '{"name":"妖魔夜行影靴","item1":"夜獸影靴1個","item2":"野性皮革4個","item3":"妖魔夜行碎片3個","item4":"烏鐵剪1個","item5":""}]}';//鞋子
-    var level30_type3_2 = '{"type3":[' +//純敏
-        '{"name":"妖魔狙殺箭袋","item1":"完整的皮革2個","item2":"凡郎皮2個","item3":"受損的蛛絲囊12個","item4":"堅韌的蛛絲囊4個","item5":"煤礦3個","item6":"烏鐵石碎片20個","item7":"妖魔獠牙圖騰2個","item8":"","item9":""},'+//箭袋
-        '{"name":"妖魔盾","item1":"煤礦5個","item2":"烏鐵石碎片10個","item3":"完整的獸皮2個","item4":"凡郎皮2個","item5":"受損的蛛絲囊12個","item6":"堅韌的蛛絲囊4個","item7":"妖魔獠牙圖騰2個","item8":"妖魔夜行碎片3個","item9":"夜獸影帽1個"},'+//副手
-        '{"name":"妖魔夜行面具","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊12個","item5":"堅韌的蛛絲囊4個","item6":"完整的獸皮3個","item7":"凡狼皮3個","item8":"妖魔夜行碎片3個","item9":"夜獸影甲1個"},'+//頭盔
-        '{"name":"妖魔夜行影甲","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"完整的獸皮5個","item7":"凡狼皮5個","item8":"妖魔夜行碎片3個","item9":"夜獸影褲1個"},'+//衣服
-        '{"name":"妖魔夜行影褲","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"完整的獸皮5個","item7":"凡狼皮5個","item8":"妖魔夜行碎片3個","item9":"夜獸影靴1個"},'+//褲子
-        '{"name":"妖魔夜行影靴","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"完整的獸皮4個","item7":"凡狼皮4個","item8":"","item9":""}]}';//鞋子
-    var level30_type4_1 = '{"type4":[' +//力智
-        '{"name":"妖魔鎖鏈頭盔","item1":"烏銀護帽1個","item2":"輕鐵板片2個","item3":"妖魔鎖鏈碎片3個","item4":"魔性綢緞2個","item5":"煤礦4個"},'+//副手
-        '{"name":"妖魔鎖鏈護甲","item1":"烏銀大衫1個","item2":"輕鐵板片4個","item3":"妖魔鎖鏈碎片3個","item4":"魔性綢緞4個","item5":"煤礦4個"},'+//頭盔
-        '{"name":"妖魔鎖鏈護褲","item1":"烏銀鍛褲1個","item2":"輕鐵板片3個","item3":"妖魔鎖鏈碎片3個","item4":"魔性綢緞3個","item5":"煤礦4個"},'+//衣服
-        '{"name":"妖魔鎖鏈長靴","item1":"烏銀長靴1個","item2":"輕鐵板片2個","item3":"妖魔鎖鏈碎片3個","item4":"魔性綢緞2個","item5":"煤礦4個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level30_type4_2 = '{"type4":[' +//力智
-        '{"name":"妖魔鎖鏈頭盔","item1":"粗鐵礦2個","item2":"煤礦6個","item3":"受損的蛛絲囊18個","item4":"堅韌的蛛絲囊6個","item5":"傑爾特的唾絲2個","item6":"妖魔鎖鏈碎片3個","item7":"烏銀護帽1個"},'+//副手
-        '{"name":"妖魔鎖鏈護甲","item1":"粗鐵礦4個","item2":"煤礦8個","item3":"受損的蛛絲囊36個","item4":"堅韌的蛛絲囊12個","item5":"傑爾特的唾絲4個","item6":"妖魔鎖鏈碎片3個","item7":"烏銀大衫1個"},'+//頭盔
-        '{"name":"妖魔鎖鏈護褲","item1":"粗鐵礦4個","item2":"煤礦8個","item3":"受損的蛛絲囊24個","item4":"堅韌的蛛絲囊8個","item5":"傑爾特的唾絲3個","item6":"妖魔鎖鏈碎片3個","item7":"烏銀鍛褲1個"},'+//衣服
-        '{"name":"妖魔鎖鏈長靴","item1":"粗鐵礦2個","item2":"煤礦6個","item3":"受損的蛛絲囊18個","item4":"堅韌的蛛絲囊6個","item5":"傑爾特的唾絲2個","item6":"妖魔鎖鏈碎片3個","item7":"烏銀長靴1個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":"","item7":""}]}';//鞋子
-    var level30_type5_1 = '{"type5":[' +//智敏
-        '{"name":"妖魔圖騰扁帽","item1":"魔紋旅帽1個","item2":"野性皮革1個","item3":"妖魔圖騰碎片3個","item4":"魔性綢緞1個","item5":"烏鐵剪1個"},'+//副手
-        '{"name":"妖魔圖騰披肩","item1":"魔紋風衣1個","item2":"野性皮革3個","item3":"妖魔圖騰碎片3個","item4":"模型綢緞3個","item5":"烏鐵剪1個"},'+//頭盔
-        '{"name":"妖魔圖騰長褲","item1":"魔紋旅褲1個","item2":"野性皮革2個","item3":"妖魔圖騰碎片3個","item4":"魔性綢緞2個","item5":"烏鐵剪1個"},'+//衣服
-        '{"name":"妖魔圖騰長靴","item1":"魔紋旅靴1個","item2":"野性皮革1個","item3":"妖魔圖騰碎片3個","item4":"魔性綢緞1個","item5":"烏鐵剪1個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level30_type5_2 = '{"type5":[' +//智敏
-        '{"name":"妖魔圖騰扁帽","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊12個","item5":"堅韌的蛛絲囊4個","item6":"完整的獸皮1個","item7":"凡狼皮1個","item8":"傑爾特的唾絲1個","item9":"妖魔圖騰碎片3個","item10":"魔紋旅帽1個"},'+//副手
-        '{"name":"妖魔圖騰披肩","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊36個","item5":"堅韌的蛛絲囊12個","item6":"完整的獸皮3個","item7":"凡狼皮3個","item8":"傑爾特的唾絲3個","item9":"妖魔圖騰碎片3個","item10":"魔紋風衣1個"},'+//頭盔
-        '{"name":"妖魔圖騰長褲","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"完整的獸皮2個","item7":"凡狼皮2個","item8":"傑爾特的唾絲2個","item9":"妖魔圖騰碎片3個","item10":"魔紋旅褲1個"},'+//衣服
-        '{"name":"妖魔圖騰長靴","item1":"粗鐵礦3個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊12個","item5":"堅韌的蛛絲囊4個","item6":"完整的獸皮1個","item7":"凡狼皮1個","item8":"傑爾特的唾絲1個","item9":"妖魔圖騰碎片3個","item10":"魔紋旅靴1個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""}]}';//鞋子
-    var level30_type6_1 = '{"type6":[' +//力敏
-        '{"name":"烏鋼輕盾","item1":"輕鐵板片2個","item2":"皮革3個","item3":"烏鐵石2個","item4":"煤礦4個","item5":"妖魔獠牙圖騰2個"},'+//副手
-        '{"name":"妖魔游擊輕盔","item1":"輕鐵板片4個","item2":"烏鐵輕盔1個","item3":"妖魔輕甲碎片3個","item4":"烏鐵石2個","item5":"煤礦4個"},'+//頭盔
-        '{"name":"妖魔游擊輕甲","item1":"輕鐵板片6個","item2":"烏鐵鱗甲1個","item3":"妖魔輕甲碎片3個","item4":"烏鐵石4個","item5":"煤礦4個"},'+//衣服
-        '{"name":"妖魔游擊護腿","item1":"輕鐵板片5個","item2":"烏鐵護腿1個","item3":"妖魔輕甲碎片3個","item4":"烏鐵石3個","item5":"煤礦4個"},'+//褲子
-        '{"name":"妖魔游擊輕靴","item1":"輕鐵板片4個","item2":"烏鐵輕靴1個","item3":"妖魔輕甲碎片3個","item4":"烏鐵石2個","item5":"煤礦4個"}]}';//鞋子
-    var level30_type6_2 = '{"type6":[' +//力敏
-        '{"name":"烏鋼輕盾","item1":"粗鐵礦2個","item2":"煤礦7個","item3":"烏鐵石碎片10個","item4":"完整的獸皮3個","item5":"受損的蛛絲囊6個","item6":"堅韌蛛絲囊2個","item7":"妖魔獠牙圖騰2個"},'+//副手
-        '{"name":"妖魔游擊輕盔","item1":"粗鐵礦4個","item2":"煤礦9個","item3":"烏鐵石碎片10個","item4":"妖魔輕甲碎片3個","item5":"烏鐵輕盔1個","item6":"","item7":""},'+//頭盔
-        '{"name":"妖魔游擊輕甲","item1":"粗鐵礦6個","item2":"煤礦12個","item3":"烏鐵石碎片20個","item4":"妖魔輕甲碎片3個","item5":"烏鐵鱗甲1個","item6":"","item7":""},'+//衣服
-        '{"name":"妖魔游擊護腿","item1":"粗鐵礦6個","item2":"煤礦12個","item3":"烏鐵石碎片20個","item4":"妖魔輕甲碎片3個","item5":"烏鐵護腿1個","item6":"","item7":""},'+//褲子
-        '{"name":"妖魔游擊輕靴","item1":"粗鐵礦4個","item2":"煤礦9個","item3":"烏鐵石碎片10個","item4":"妖魔輕甲碎片3個","item5":"烏鐵輕靴1個","item6":"","item7":""}]}';//鞋子
-    //- - - - - 40級製作裝 - - - - -
-    var level40_type1_1 = '{"type1":[' +//純力
-        '{"name":"金鐵之盾","item1":"叢林原木18個","item2":"光輝鐵板7個","item3":"煤礦3個","item4":"木雕刻刀1個","item5":""},'+//副手
-        '{"name":"光耀戰盔","item1":"光輝鐵板5個","item2":"煤礦1個","item3":"","item4":"","item5":""},'+//頭盔
-        '{"name":"光耀戰甲","item1":"光輝鐵板8個","item2":"煤礦1個","item3":"","item4":"","item5":""},'+//衣服
-        '{"name":"光耀褲鎧","item1":"光耀鐵板7個","item2":"煤礦1個","item3":"","item4":"","item5":""},'+//褲子
-        '{"name":"光耀戰靴","item1":"光耀鐵板6個","item2":"煤礦1個","item3":"","item4":"","item5":""}]}';//鞋子
-    var level40_type1_2 = '{"type1":[' +//純力
-        '{"name":"金鐵之盾","item1":"粗鐵礦5個","item2":"暗鐵礦42個","item3":"煤礦45個","item4":"橡木木材64個","item5":"叢林原木18個","item6":"附魔石2個"},'+//副手
-        '{"name":"光耀戰盔","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"","item5":"","item6":""},'+//頭盔
-        '{"name":"光耀戰甲","item1":"暗鐵礦48個","item2":"煤礦49個","item3":"荒蕪碎片8個","item4":"","item5":"","item6":""},'+//衣服
-        '{"name":"光耀褲鎧","item1":"暗鐵礦42個","item2":"煤礦43個","item3":"荒蕪碎片7個","item4":"","item5":"","item6":""},'+//褲子
-        '{"name":"光耀戰靴","item1":"暗鐵礦36個","item2":"煤礦37個","item3":"荒蕪碎片6個","item4":"","item5":"","item6":""}]}';//鞋子
-    var level40_type2_1 = '{"type2":[' +//純智
-        '{"name":"智慧隨從","item1":"叢林原木18個","item2":"狂獸皮革1個","item3":"銀綢7個","item4":"符紋紙64個","item5":"烏鐵剪1個","item6":"木雕刻刀"},'+//副手
-        '{"name":"銀光法帽","item1":"銀綢5個","item2":"烏鐵剪1個","item3":"","item4":"","item5":"","item6":""},'+//頭盔
-        '{"name":"銀光法袍","item1":"銀綢8個","item2":"烏鐵剪1個","item3":"","item4":"","item5":"","item6":""},'+//衣服
-        '{"name":"銀光褲裙","item1":"銀綢7個","item2":"烏鐵剪1個","item3":"","item4":"","item5":"","item6":""},'+//褲子
-        '{"name":"銀光之履","item1":"銀綢6個","item2":"烏鐵剪1個","item3":"","item4":"","item5":"","item6":""}]}';//鞋子
-    var level40_type2_2 = '{"type2":[' +//純智
-        '{"name":"智慧隨從","item1":"粗鐵礦8個","item2":"煤礦2個","item3":"橡木木材64個","item4":"叢林原木60個","item5":"受損的蛛絲囊72個","item6":"堅韌的蛛絲囊24個","item7":"完整的獸皮1個","item8":"狂狼皮2個","item9":"銀化魔絲21個","item10":"附魔石9個"},'+//副手
-        '{"name":"銀光法帽","item1":"受損的蛛絲囊42個","item2":"堅韌的蛛絲囊14個","item3":"銀化魔絲15個","item4":"附魔石5個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//頭盔
-        '{"name":"銀光法袍","item1":"受損的蛛絲囊66個","item2":"堅韌的蛛絲囊22個","item3":"銀化魔絲24個","item4":"附魔石8個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//衣服
-        '{"name":"銀光褲裙","item1":"受損的蛛絲囊60個","item2":"堅韌的蛛絲囊20個","item3":"銀化魔絲21個","item4":"附魔石7個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//褲子
-        '{"name":"銀光之履","item1":"受損的蛛絲囊48個","item2":"堅韌的蛛絲囊16個","item3":"銀化魔絲18個","item4":"附魔石6個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""}]}';//鞋子
-    var level40_type3_1 = '{"type3":[' +//純敏
-        '{"name":"光耀箭袋","item1":"狂獸皮革6個","item2":"烏鐵石4個","item3":"妖魔狙殺箭袋1個","item4":"烏鐵剪2個","item5":""},'+//箭袋
-        '{"name":"狂獸之盾","item1":"叢林原木18個","item2":"狂獸皮革7個","item3":"烏鐵剪1個","item4":"木雕刻刀1個","item5":""},'+//副手
-        '{"name":"狂獸皮盔","item1":"狂獸皮革5個","item2":"烏鐵剪1個","item3":"","item4":"","item5":""},'+//頭盔
-        '{"name":"狂獸皮甲","item1":"狂獸皮革8個","item2":"烏鐵剪1個","item3":"","item4":"","item5":""},'+//衣服
-        '{"name":"狂獸皮褲","item1":"狂獸皮革7個","item2":"烏鐵剪1個","item3":"","item4":"","item5":""},'+//褲子
-        '{"name":"狂獸皮靴","item1":"狂獸皮革6個","item2":"烏鐵剪1個","item3":"","item4":"","item5":""}]}';//鞋子
-    var level40_type3_2 = '{"type3":[' +//純敏
-        '{"name":"光耀箭袋","item1":"粗鐵礦6個","item2":"煤礦6個","item3":"烏鐵石碎片40個","item4":"受損的蛛絲囊36個","item5":"堅韌的蛛絲囊12個","item6":"完整的獸皮6個","item7":"狂狼皮12個","item8":"妖魔狙殺箭袋1個","item9":"","item10":""},'+//箭袋
-        '{"name":"狂獸之盾","item1":"粗鐵礦8個","item2":"煤礦2個","item3":"烏鐵石碎片10個","item4":"受損的蛛絲囊42個","item5":"堅韌的蛛絲囊14個","item6":"完整的獸皮7個","item7":"狂狼皮14個","item8":"橡木木材64個","item9":"叢林原木18個","item10":"附魔石2個"},'+//副手
-        '{"name":"狂獸皮盔","item1":"受損的蛛絲囊30個","item2":"堅韌的蛛絲囊10個","item3":"完整的獸皮5個","item4":"狂狼皮10個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//頭盔
-        '{"name":"狂獸皮甲","item1":"受損的蛛絲囊48個","item2":"堅韌的蛛絲囊16個","item3":"完整的獸皮8個","item4":"狂狼皮16個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//衣服
-        '{"name":"狂獸皮褲","item1":"受損的蛛絲囊42個","item2":"堅韌的蛛絲囊14個","item3":"完整的獸皮7個","item4":"狂狼皮14個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""},'+//褲子
-        '{"name":"狂獸皮靴","item1":"受損的蛛絲囊36個","item2":"堅韌的蛛絲囊12個","item3":"完整的獸皮6個","item4":"狂狼皮12個","item5":"","item6":"","item7":"","item8":"","item9":"","item10":""}]}';//鞋子
-    var level40_type4_1 = '{"type4":[' +//力智
-        '{"name":"光芒聖盔","item1":"光輝鐵板3個","item2":"銀綢2個","item3":"煤礦1個","item4":"","item5":""},'+//副手
-        '{"name":"光芒鏈甲","item1":"光輝鐵板6個","item2":"銀綢3個","item3":"煤礦1個","item4":"","item5":""},'+//頭盔
-        '{"name":"光芒護腿","item1":"光輝鐵板5個","item2":"銀綢3個","item3":"煤礦1個","item4":"","item5":""},'+//衣服
-        '{"name":"光芒鎖鏈靴","item1":"光輝鐵板3個","item2":"銀綢2個","item3":"煤礦1個","item4":"","item5":""},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level40_type4_2 = '{"type4":[' +//力智
-        '{"name":"光芒聖盔","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"銀化魔絲6個","item7":"附魔石2個"},'+//副手
-        '{"name":"光芒鏈甲","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"銀化魔絲9個","item7":"附魔石3個"},'+//頭盔
-        '{"name":"光芒護腿","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"銀化魔絲9個","item7":"附魔石3個"},'+//衣服
-        '{"name":"光芒鎖鏈靴","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"銀化魔絲6個","item7":"附魔石2個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":"","item7":""}]}';//鞋子
-    var level40_type5_1 = '{"type5":[' +//智敏
-        '{"name":"光耀面具","item1":"狂獸皮革3個","item2":"銀綢2個","item3":"烏鐵剪1個","item4":"","item5":""},'+//副手
-        '{"name":"光耀披肩","item1":"狂獸皮革6個","item2":"銀綢3個","item3":"烏鐵剪1個","item4":"","item5":""},'+//頭盔
-        '{"name":"光耀襯褲","item1":"狂獸皮革5個","item2":"銀綢3個","item3":"烏鐵剪1個","item4":"","item5":""},'+//衣服
-        '{"name":"光耀長靴","item1":"狂獸皮革3個","item2":"銀綢2個","item3":"烏鐵剪1個","item4":"","item5":""},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":""}]}';//鞋子
-    var level40_type5_2 = '{"type5":[' +//智敏
-        '{"name":"光耀面具","item1":"暗鐵礦18個","item2":"煤礦19個","item3":"荒蕪碎片3個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"銀化魔絲6個","item7":"附魔石2個"},'+//副手
-        '{"name":"光耀披肩","item1":"暗鐵礦36個","item2":"煤礦37個","item3":"荒蕪碎片6個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"銀化魔絲9個","item7":"附魔石3個"},'+//頭盔
-        '{"name":"光耀襯褲","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊24個","item5":"堅韌的蛛絲囊8個","item6":"銀化魔絲9個","item7":"附魔石3個"},'+//衣服
-        '{"name":"光耀長靴","item1":"暗鐵礦18個","item2":"煤礦19個","item3":"荒蕪碎片3個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"銀化魔絲6個","item7":"附魔石2個"},'+//褲子
-        '{"name":"","item1":"","item2":"","item3":"","item4":"","item5":"","item6":"","item7":""}]}';//鞋子
-    var level40_type6_1 = '{"type6":[' +//力敏
-        '{"name":"光耀輕盾","item1":"叢林原木18個","item2":"狂獸皮革4個","item3":"光輝鐵板4個","item4":"煤礦2個","item5":"烏鐵剪1個","item6":"木雕刻刀"},'+//副手
-        '{"name":"光耀護盔","item1":"光輝鐵板3個","item2":"狂獸皮革2個","item3":"煤礦1個","item4":"","item5":"","item6":""},'+//頭盔
-        '{"name":"光輝輕甲","item1":"光輝鐵板6個","item2":"狂獸皮革3個","item3":"煤礦1個","item4":"","item5":"","item6":""},'+//衣服
-        '{"name":"光輝護腿","item1":"光輝鐵板5個","item2":"狂獸皮革3個","item3":"煤礦1個","item4":"","item5":"","item6":""},'+//褲子
-        '{"name":"光輝輕靴","item1":"光輝鐵板3個","item2":"狂獸皮革2個","item3":"煤礦1個","item4":"","item5":"","item6":""}]}';//鞋子
-    var level40_type6_2 = '{"type6":[' +//力敏
-        '{"name":"光耀輕盾","item1":"粗鐵礦8個","item2":"暗鐵礦24個","item3":"煤礦28個","item4":"烏鐵石碎片10個","item5":"橡木木材64個","item6":"叢林原木18個","item7":"附魔石2個","item8":"受損的蛛絲囊24個","item9":"堅韌的蛛絲囊8個","item10":"完整的獸皮4個","item11":"狂狼皮8個"},'+//副手
-        '{"name":"光耀護盔","item1":"暗鐵礦18個","item2":"煤礦19個","item3":"荒蕪碎片3個","item4":"受損的蛛絲囊12個","item5":"堅韌的蛛絲囊4個","item6":"完整的獸皮2個","item7":"狂狼皮4個","item8":"","item9":"","item10":"","item11":""},'+//頭盔
-        '{"name":"光輝輕甲","item1":"暗鐵礦36個","item2":"煤礦37個","item3":"荒蕪碎片6個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"完整的獸皮3個","item7":"狂狼皮6個","item8":"","item9":"","item10":"","item11":""},'+//衣服
-        '{"name":"光輝護腿","item1":"暗鐵礦30個","item2":"煤礦31個","item3":"荒蕪碎片5個","item4":"受損的蛛絲囊18個","item5":"堅韌的蛛絲囊6個","item6":"完整的獸皮3個","item7":"狂狼皮6個","item8":"","item9":"","item10":"","item11":""},'+//褲子
-        '{"name":"光輝輕靴","item1":"暗鐵礦18個","item2":"煤礦19個","item3":"荒蕪碎片3個","item4":"受損的蛛絲囊12個","item5":"堅韌的蛛絲囊4個","item6":"完整的獸皮2個","item7":"狂狼皮4個","item8":"","item9":"","item10":"","item11":""}]}';//鞋子
-                
-    var obj20_1 = JSON.parse(level20_type1_1);
-    var obj20_10 = JSON.parse(level20_type1_2);
-    var obj20_2 = JSON.parse(level20_type2_1);
-    var obj20_20 = JSON.parse(level20_type2_2);
-    var obj20_3 = JSON.parse(level20_type3_1);
-    var obj20_30 = JSON.parse(level20_type3_2);
-    var obj20_4 = JSON.parse(level20_type4_1);
-    var obj20_40 = JSON.parse(level20_type4_2);
-    var obj20_5 = JSON.parse(level20_type5_1);
-    var obj20_50 = JSON.parse(level20_type5_2);
-    var obj20_6 = JSON.parse(level20_type6_1);
-    var obj20_60 = JSON.parse(level20_type6_2);
-            
-    var obj30_1 = JSON.parse(level30_type1_1);
-    var obj30_10 = JSON.parse(level30_type1_2);
-    var obj30_2 = JSON.parse(level30_type2_1);
-    var obj30_20 = JSON.parse(level30_type2_2);
-    var obj30_3 = JSON.parse(level30_type3_1);
-    var obj30_30 = JSON.parse(level30_type3_2);
-    var obj30_4 = JSON.parse(level30_type4_1);
-    var obj30_40 = JSON.parse(level30_type4_2);
-    var obj30_5 = JSON.parse(level30_type5_1);
-    var obj30_50 = JSON.parse(level30_type5_2);
-    var obj30_6 = JSON.parse(level30_type6_1);
-    var obj30_60 = JSON.parse(level30_type6_2);
-            
-    var obj40_1 = JSON.parse(level40_type1_1);
-    var obj40_10 = JSON.parse(level40_type1_2);
-    var obj40_2 = JSON.parse(level40_type2_1);
-    var obj40_20 = JSON.parse(level40_type2_2);
-    var obj40_3 = JSON.parse(level40_type3_1);
-    var obj40_30 = JSON.parse(level40_type3_2);
-    var obj40_4 = JSON.parse(level40_type4_1);
-    var obj40_40 = JSON.parse(level40_type4_2);
-    var obj40_5 = JSON.parse(level40_type5_1);
-    var obj40_50 = JSON.parse(level40_type5_2);
-    var obj40_6 = JSON.parse(level40_type6_1);
-    var obj40_60 = JSON.parse(level40_type6_2);
-    //- - - 20
-    $("#level_20").click(function(){
-        $("#bottom-btmBox").html("");
-        $("#bottom-topBox .type").show(200);               
-        $(document).ready(function(){
-            $("#type_1").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_1.type1.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_1.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_1.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_1.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_1.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_1.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_1.type1[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_10.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_10.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_10.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_10.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_10.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_10.type1[i].item5 + "</span>" + 
-                        "</p>";
-                }
+    if (type == 0){
+        $("#type").addClass("warning"); //錯誤時顏色警示
+    }else {
+        $("#type").removeClass("warning"); //正確時顏色清除
         
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_2").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_2.type2.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_2.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_2.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_2.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_2.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_2.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_2.type2[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_20.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj20_20.type2[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_3").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_3.type3.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_3.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_3.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_3.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_3.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_3.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_3.type3[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_30.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj20_30.type3[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_4").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_4.type4.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_4.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_4.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_4.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_4.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_4.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_4.type4[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_40.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj20_40.type4[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_5").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_5.type5.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_5.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_5.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_5.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_5.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_5.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_5.type5[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_50.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj20_50.type5[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_6").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj20_6.type6.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_6.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_6.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_6.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_6.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_6.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_6.type6[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj20_60.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj20_60.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj20_60.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj20_60.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj20_60.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj20_60.type6[i].item5 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-        });
-    }); 
-    //- - - 30
-    $("#level_30").click(function(){
-        $("#bottom-btmBox").html("");
-        $("#bottom-topBox .type").show(200);                
-                
-        $(document).ready(function(){
-            $("#type_1").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_1.type1.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_1.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_1.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_1.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_1.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_1.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_1.type1[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_10.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_10.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_10.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_10.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_10.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_10.type1[i].item5 + "</span>" + 
-                        "</p>";
-                }
-                            
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_2").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_2.type2.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_2.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_2.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_2.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_2.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_2.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_2.type2[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_20.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item7 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item8 + "</span>" + 
-                        "<span class = 'style'>" + obj30_20.type2[i].item9 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_3").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_3.type3.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_3.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_3.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_3.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_3.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_3.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_3.type3[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_30.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item7 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item8 + "</span>" + 
-                        "<span class = 'style'>" + obj30_30.type3[i].item9 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_4").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_4.type4.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_4.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_4.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_4.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_4.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_4.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_4.type4[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_40.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj30_40.type4[i].item7 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_5").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_5.type5.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_5.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_5.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_5.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_5.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_5.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_5.type5[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_50.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item7 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item8 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item9 + "</span>" + 
-                        "<span class = 'style'>" + obj30_50.type5[i].item10 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_6").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj30_6.type6.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_6.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_6.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_6.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_6.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_6.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_6.type6[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj30_60.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj30_60.type6[i].item7 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-        });
-    }); 
-    //- - - 40
-    $("#level_40").click(function(){
-        $("#bottom-btmBox").html("");
-        $("#bottom-topBox .type").show(200);
-                
-        $(document).ready(function(){
-            $("#type_1").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_1.type1.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_1.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_1.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_1.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_1.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_1.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_1.type1[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_10.type1[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_10.type1[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                            
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_2").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_2.type2.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_2.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_2.type2[i].item6 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_20.type2[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item7 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item8 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item9 + "</span>" + 
-                        "<span class = 'style'>" + obj40_20.type2[i].item10 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_3").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_3.type3.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_3.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_3.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_3.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_3.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_3.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_3.type3[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_30.type3[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item7 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item8 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item9 + "</span>" + 
-                        "<span class = 'style'>" + obj40_30.type3[i].item10 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_4").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_4.type4.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_4.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_4.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_4.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_4.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_4.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_4.type4[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_40.type4[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj40_40.type4[i].item7 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_5").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_5.type5.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_5.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_5.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_5.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_5.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_5.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_5.type5[i].item5 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_50.type5[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item6 + "</span>" + 
-                        "<span class = 'style'>" + obj40_50.type5[i].item7 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-            //--------
-            $("#type_6").click(function(){
-                var getItem1 = "";
-                var getItem2 = "";
-                            
-                for(i = 0; i < obj40_6.type6.length; i++){
-                    getItem1 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_6.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_6.type6[i].item6 + "</span>" + 
-                        "</p>";
-                    getItem2 +=
-                        "<p class = 'style'>" + 
-                        "<span class = 'style name'>" + obj40_60.type6[i].name + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item1 + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item2 + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item3 + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item4 + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item5 + "</span>" + 
-                        "<span class = 'style'>" + obj40_60.type6[i].item6 + "</span>" + 
-                        "</p>";
-                }
-                $("#bottom-btmBox").html(getItem1 + "<hr>" + getItem2);
-            });
-        });
-    }); 
-};
+        myFunction(lv,tp); //開始叫資料
+    }
+}
+function myFunction(lv,tp){
+    ////////////////////////////////////////////////////
+    //裝備名稱 順序：力、智、敏、力智、力敏、智敏、頭盔、衣服、褲子、鞋子
+    ////////////////////////////////////////////////////
+    var name20_1 = ["烏鐵戰帽","烏鐵戰甲","烏鐵褲鎧","烏鐵戰靴"];
+    var name20_2 = ["巫士法帽","巫士法袍","巫士護褲","巫士尖靴"];
+    var name20_3 = ["夜獸影帽","夜獸影甲","夜獸影褲","夜獸影靴"];
+    var name20_4 = ["烏銀護帽","烏銀大衫","烏銀鍛褲","烏銀長靴"];
+    var name20_5 = ["烏鐵輕盔","烏鐵鱗甲","烏鐵護腿","烏鐵輕靴"];
+    var name20_6 = ["魔紋旅帽","魔紋風衣","魔紋旅褲","魔紋旅靴"];
+    
+    var name30_1 = ["妖魔戰鬥面甲","妖魔戰鬥鎧甲","妖魔戰鬥褲鎧","妖魔戰鬥戰靴"];
+    var name30_2 = ["妖魔咒術之帽","妖魔咒術法袍","妖魔咒術護褲","妖魔咒術尖靴"];
+    var name30_3 = ["妖魔夜行面具","妖魔夜行影甲","妖魔夜行影褲","妖魔夜行影靴"];
+    var name30_4 = ["妖魔鎖鏈頭盔","妖魔鎖鏈護甲","妖魔鎖鏈護褲","妖魔鎖鏈長靴"];
+    var name30_5 = ["妖魔游擊輕盔","妖魔游擊輕甲","妖魔游擊護腿","妖魔游擊輕靴"];
+    var name30_6 = ["妖魔圖騰扁帽","妖魔圖騰披肩","妖魔圖騰長褲","妖魔圖騰長靴"];
+    
+    var name40_1 = ["光耀戰盔","光耀戰甲","光耀褲鎧","光耀戰靴"];
+    var name40_2 = ["銀光法帽","銀光法袍","銀光褲裙","銀光之履"];
+    var name40_3 = ["狂獸皮盔","狂獸皮甲","狂獸皮褲","狂獸皮靴"];
+    var name40_4 = ["光芒聖盔","光芒鏈甲","光芒護腿","光芒鎖鏈靴"];
+    var name40_5 = ["光耀護盔","光輝輕甲","光輝護腿","光輝輕靴"];
+    var name40_6 = ["光耀面具","光耀披肩","光耀襯褲","光耀長靴"];
+    ///////////////////////////////////////////////////////
+    //總材料名稱 順序：力、智、敏、力智、力敏、智敏、頭盔、衣服、褲子、鞋子
+    ///////////////////////////////////////////////////////
+    var itemName20_1 = ["鍛鐵板片","鑄鐵系列","烏鐵石","煤礦"];
+    var itemName20_2 = ["綢緞","巫徒系列","魔性綢緞","剪刀"];
+    var itemName20_3 = ["皮革","野獸系列","野性皮革","剪刀"];
+    var itemName20_4 = ["輕鐵板片","網紋系列","魔性綢緞","煤礦"];
+    var itemName20_5 = ["輕鐵板片","輕鐵系列","堅硬外殼","烏鐵石碎片","煤礦"];
+    var itemName20_6 = ["皮革","青絲系列","魔性","剪刀"];
+    
+    var itemName30_1 = ["鍛鐵板片","烏鐵系列","烏鐵石","妖魔鎧甲碎片","煤礦"];
+    var itemName30_2 = ["巫士系列","綢緞","魔性綢緞","妖魔咒術碎片","烏鐵剪"];
+    var itemName30_3 = ["夜獸系列","野性皮革","妖魔夜行碎片","烏鐵剪"];
+    var itemName30_4 = ["烏銀系列","輕鐵板片","妖魔鎖鏈碎片","魔性綢緞","煤礦"];
+    var itemName30_5 = ["輕鐵板片","烏鐵系列","妖魔輕甲系列","烏鐵石","煤礦"];
+    var itemName30_6 = ["魔紋系列","野性皮革","妖魔圖騰碎片","魔性綢緞","烏鐵剪"];
+    
+    var itemName40_1 = ["光輝鐵板","煤礦"];
+    var itemName40_2 = ["銀綢","烏鐵剪"];
+    var itemName40_3 = ["狂獸皮革","烏鐵剪"];
+    var itemName40_4 = ["光輝鐵板","銀綢","煤礦"];
+    var itemName40_5 = ["光輝鐵板","狂獸皮革","煤礦"];
+    var itemName40_6 = ["狂獸皮革","銀綢","烏鐵剪"];
+    ////////////
+    //總材料數量 順序：力、智、敏、力智、力敏、智敏、頭盔、衣服、褲子、鞋子
+    ////////////
+    var itemAmount20_1_1 = [1,1,1,2],
+        itemAmount20_1_2 = [4,1,1,2],
+        itemAmount20_1_3 = [2,1,1,2],
+        itemAmount20_1_4 = [1,1,1,2];
+    var itemAmount20_2_1 = [1,1,1,1],
+        itemAmount20_2_2 = [4,1,1,1],
+        itemAmount20_2_3 = [3,1,1,1],
+        itemAmount20_2_4 = [2,1,1,1];
+    var itemAmount20_3_1 = [3,1,1,1],
+        itemAmount20_3_2 = [0,1,2,1],
+        itemAmount20_3_3 = [4,1,1,1],
+        itemAmount20_3_4 = [3,1,1,1];
+    var itemAmount20_4_1 = [1,1,1,2],
+        itemAmount20_4_2 = [4,1,1,2],
+        itemAmount20_4_3 = [2,1,1,2],
+        itemAmount20_4_4 = [1,1,1,2];
+    var itemAmount20_5_1 = [1,1,2,3,2],
+        itemAmount20_5_2 = [3,1,5,5,2],
+        itemAmount20_5_3 = [2,1,4,4,2],
+        itemAmount20_5_4 = [1,1,2,3,2];
+    var itemAmount20_6_1 = [1,1,1,1],
+        itemAmount20_6_2 = [4,1,1,1],
+        itemAmount20_6_3 = [1,1,1,1],
+        itemAmount20_6_4 = [2,1,1,1];
+    
+    var itemAmount30_1_1 = [3,1,4,3,4],
+        itemAmount30_1_2 = [6,1,6,3,4],
+        itemAmount30_1_3 = [5,1,5,3,4],
+        itemAmount30_1_4 = [3,1,4,3,2];        
+    var itemAmount30_2_1 = [1,1,4,3,1],
+        itemAmount30_2_2 = [1,2,6,3,1],
+        itemAmount30_2_3 = [1,2,5,3,1],
+        itemAmount30_2_4 = [1,1,4,3,1];
+    var itemAmount30_3_1 = [1,3,3,1],
+        itemAmount30_3_2 = [1,5,3,1],
+        itemAmount30_3_3 = [1,5,3,1],
+        itemAmount30_3_4 = [1,4,3,1];
+    var itemAmount30_4_1 = [1,2,3,2,4],
+        itemAmount30_4_2 = [1,4,3,4,4],
+        itemAmount30_4_3 = [1,3,3,3,4],
+        itemAmount30_4_4 = [1,2,3,2,4];
+    var itemAmount30_5_1 = [4,1,3,2,4],
+        itemAmount30_5_2 = [6,1,4,3,4],
+        itemAmount30_5_3 = [5,1,3,3,4],
+        itemAmount30_5_4 = [4,1,2,3,4];
+    var itemAmount30_6_1 = [1,1,3,1,1],
+        itemAmount30_6_2 = [1,3,3,3,1],
+        itemAmount30_6_3 = [1,2,3,2,1],
+        itemAmount30_6_4 = [1,1,3,1,1];
+    
+    var itemAmount40_1_1 = [5,1],
+        itemAmount40_1_2 = [8,1],
+        itemAmount40_1_3 = [7,1],
+        itemAmount40_1_4 = [6,1];        
+    var itemAmount40_2_1 = [5,1],
+        itemAmount40_2_2 = [8,1],
+        itemAmount40_2_3 = [7,1],
+        itemAmount40_2_4 = [6,1];
+    var itemAmount40_3_1 = [5,1],
+        itemAmount40_3_2 = [8,1],
+        itemAmount40_3_3 = [7,1],
+        itemAmount40_3_4 = [6,1];
+    var itemAmount40_4_1 = [3,2,1],
+        itemAmount40_4_2 = [6,3,1],
+        itemAmount40_4_3 = [5,3,1],
+        itemAmount40_4_4 = [3,2,1];
+    var itemAmount40_5_1 = [3,2,1],
+        itemAmount40_5_2 = [6,3,1],
+        itemAmount40_5_3 = [5,3,1],
+        itemAmount40_5_4 = [3,2,1];
+    var itemAmount40_6_1 = [3,2,1],
+        itemAmount40_6_2 = [6,3,1],
+        itemAmount40_6_3 = [5,3,1],
+        itemAmount40_6_4 = [3,2,1];
+    ///////////////////////////////////////////////////////
+    //基礎材料名稱 順序：力、智、敏、力智、力敏、智敏、頭盔、衣服、褲子、鞋子
+    ///////////////////////////////////////////////////////
+    var item20_1 = ["粗鐵礦","煤礦","烏鐵石碎片","鑄鐵系列"];
+    var item20_2 = ["受損的蛛絲囊","堅韌的蛛絲囊","傑爾特的唾絲","魔法石","巫徒系列"];
+    var item20_3 = ["受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","凡狼皮","剪刀","野獸系列"];
+    var item20_4 = ["粗鐵礦","煤礦","受損的蛛絲囊","堅韌的蛛絲囊","傑爾特的唾絲","網紋系列"];
+    var item20_5 = ["粗鐵礦","煤礦","烏鐵石碎片","堅硬外殼","輕鐵系列"];
+    var item20_6 = ["受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","傑爾特的唾絲","剪刀","青絲系列"];
+    
+    var item30_1 = ["粗鐵礦","煤礦","烏鐵石碎片","妖魔鎧甲碎片","烏鐵系列"];
+    var item30_2 = ["粗鐵礦","煤礦","烏鐵石碎片","受損的蛛絲囊","堅韌的蛛絲囊","傑爾特的唾絲","魔法石","妖魔咒術碎片","巫士系列"];
+    var item30_3 = ["粗鐵礦","煤礦","烏鐵石碎片","受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","凡狼皮","妖魔夜行碎片","夜獸系列"];
+    var item30_4 = ["粗鐵礦","煤礦","受損的蛛絲囊","堅韌的蛛絲囊","傑爾特的唾絲","妖魔鎖鏈碎片","烏銀系列"];
+    var item30_5 = ["粗鐵礦","煤礦","烏鐵石碎片","妖魔輕甲碎片","烏鐵系列"];
+    var item30_6 = ["粗鐵礦","煤礦","烏鐵石碎片","受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","凡狼皮","傑爾特的唾絲","妖魔圖騰碎片","魔紋系列"];
+    
+    var item40_1 = ["暗鐵礦","煤礦","荒蕪碎片","烏鐵石碎片"];
+    var item40_2 = ["粗鐵礦","煤礦","烏鐵石碎片","受損的蛛絲囊","堅韌的蛛絲囊","銀化魔絲","附魔石"];
+    var item40_3 = ["粗鐵礦","煤礦","烏鐵石碎片","受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","狂狼皮"];
+    var item40_4 = ["暗鐵礦","煤礦","荒蕪碎片","受損的蛛絲囊","堅韌的蛛絲囊","銀化魔絲","附魔石","烏鐵石碎片"];
+    var item40_5 = ["暗鐵礦","煤礦","荒蕪碎片","受損的蛛絲囊","堅韌的蛛絲囊","完整的獸皮","狂狼皮","烏鐵石碎片"];
+    var item40_6 = ["暗鐵礦","煤礦","荒蕪碎片","受損的蛛絲囊","堅韌的蛛絲囊","銀化魔絲","附魔石","烏鐵石碎片"];
+    ////////////
+    //製作材料數量 順序：力、智、敏、力智、力敏、智敏、頭盔、衣服、褲子、鞋子
+    ////////////
+    var Amount20_1_1 = [2,5,10,1],
+        Amount20_1_2 = [4,7,10,1],
+        Amount20_1_3 = [2,5,10,1],
+        Amount20_1_4 = [2,5,10,1];
+    var Amount20_2_1 = [18,6,1,2,1],
+        Amount20_2_2 = [42,14,1,8,1],
+        Amount20_2_3 = [36,12,1,6,1],
+        Amount20_2_4 = [24,8,1,4,1];
+    var Amount20_3_1 = [12,4,4,1,1,1],
+        Amount20_3_2 = [12,4,2,2,1,1],
+        Amount20_3_3 = [12,4,5,1,1,1],
+        Amount20_3_4 = [12,4,4,1,1,1];
+    var Amount20_4_1 = [2,4,12,4,1,1],
+        Amount20_4_2 = [4,6,12,4,1,1],
+        Amount20_4_3 = [2,4,12,4,1,1],
+        Amount20_4_4 = [2,4,12,4,1,1];
+    var Amount20_5_1 = [2,4,3,2,1],
+        Amount20_5_2 = [4,6,5,5,1],
+        Amount20_5_3 = [2,4,4,4,1],
+        Amount20_5_4 = [2,4,3,2,1];
+    var Amount20_6_1 = [12,4,1,1,1,1],
+        Amount20_6_2 = [18,6,4,1,1,1],
+        Amount20_6_3 = [12,4,1,1,1,1],
+        Amount20_6_4 = [12,4,2,1,1,1];
+    
+    var Amount30_1_1 = [4,10,20,3,1],
+        Amount30_1_2 = [6,13,30,3,1],
+        Amount30_1_3 = [6,13,30,3,1],
+        Amount30_1_4 = [4,8,20,3,1];
+    var Amount30_2_1 = [3,2,10,42,14,4,2,3,1],
+        Amount30_2_2 = [3,2,10,66,22,6,4,3,1],
+        Amount30_2_3 = [3,2,10,60,20,5,4,3,1],
+        Amount30_2_4 = [3,2,10,42,14,4,2,3,1];
+    var Amount30_3_1 = [3,2,10,12,4,3,3,3,1],
+        Amount30_3_2 = [3,2,10,24,8,5,5,3,1],
+        Amount30_3_3 = [3,2,10,24,8,5,5,3,1],
+        Amount30_3_4 = [3,2,10,18,6,4,4,3,1];
+    var Amount30_4_1 = [2,6,18,6,2,3,1],
+        Amount30_4_2 = [4,8,36,12,4,3,1],
+        Amount30_4_3 = [4,8,24,8,3,3,1],
+        Amount30_4_4 = [2,6,18,6,2,3,1];
+    var Amount30_5_1 = [4,9,10,3,1],
+        Amount30_5_2 = [6,12,20,3,1],
+        Amount30_5_3 = [6,12,20,3,1],
+        Amount30_5_4 = [4,9,10,3,1];
+    var Amount30_6_1 = [3,2,10,12,4,1,1,1,3,1],
+        Amount30_6_2 = [3,2,10,36,12,3,3,3,3,1],
+        Amount30_6_3 = [3,2,10,24,8,2,2,2,3,1],
+        Amount30_6_4 = [3,2,10,12,4,1,1,1,3,1];
+    
+    var Amount40_1_1 = [30,31,5,50],
+        Amount40_1_2 = [48,49,8,80],
+        Amount40_1_3 = [42,43,7,70],
+        Amount40_1_4 = [36,37,6,60];
+    var Amount40_2_1 = [3,2,10,42,14,15,5],
+        Amount40_2_2 = [3,2,10,66,22,24,8],
+        Amount40_2_3 = [3,2,10,60,20,21,7],
+        Amount40_2_4 = [3,2,10,48,16,18,6];
+    var Amount40_3_1 = [3,2,10,30,10,5,10],
+        Amount40_3_2 = [3,2,10,48,16,8,16],
+        Amount40_3_3 = [3,2,10,42,14,7,14],
+        Amount40_3_4 = [3,2,10,36,12,6,12];
+    var Amount40_4_1 = [30,31,5,18,6,6,2,50],
+        Amount40_4_2 = [30,31,5,24,8,9,3,50],
+        Amount40_4_3 = [30,31,5,24,8,9,3,50],
+        Amount40_4_4 = [30,31,5,18,6,6,2,50];
+    var Amount40_5_1 = [18,19,3,12,4,2,4,30],
+        Amount40_5_2 = [36,37,6,18,6,3,6,60],
+        Amount40_5_3 = [30,31,5,18,6,3,6,50],
+        Amount40_5_4 = [18,19,3,12,4,2,4,30];
+    var Amount40_6_1 = [18,19,3,18,6,6,2,30],
+        Amount40_6_2 = [36,37,6,24,8,9,3,60],
+        Amount40_6_3 = [30,31,5,24,8,9,3,50],
+        Amount40_6_4 = [18,19,3,18,6,6,2,30];
+    ///////////////////////////////////////////////////////
+    //資料標籤
+    ///////////////////////////////////////////////////////
+    //裝備名稱
+    var nameLevel20 = [name20_1,name20_2,name20_3,name20_4,name20_5,name20_6];
+    var nameLevel30 = [name30_1,name30_2,name30_3,name30_4,name30_5,name30_6];
+    var nameLevel40 = [name40_1,name40_2,name40_3,name40_4,name40_5,name40_6];
+    var name = [nameLevel20,nameLevel30,nameLevel40];
+    
+    //總材料名稱
+    var totalName20 = [itemName20_1,itemName20_2,itemName20_3,itemName20_4,itemName20_5,itemName20_6];
+    var totalName30 = [itemName30_1,itemName30_2,itemName30_3,itemName30_4,itemName30_5,itemName30_6];
+    var totalName40 = [itemName40_1,itemName40_2,itemName40_3,itemName40_4,itemName40_5,itemName40_6];
+    var totalName = [totalName20,totalName30,totalName40];
+    
+    //總材料數量
+    var gatTotalAmount20_1 = [itemAmount20_1_1,itemAmount20_1_2,itemAmount20_1_3,itemAmount20_1_4];
+    var gatTotalAmount20_2 = [itemAmount20_2_1,itemAmount20_2_2,itemAmount20_2_3,itemAmount20_2_4];
+    var gatTotalAmount20_3 = [itemAmount20_3_1,itemAmount20_3_2,itemAmount20_3_3,itemAmount20_3_4];
+    var gatTotalAmount20_4 = [itemAmount20_4_1,itemAmount20_4_2,itemAmount20_4_3,itemAmount20_4_4];
+    var gatTotalAmount20_5 = [itemAmount20_5_1,itemAmount20_5_2,itemAmount20_5_3,itemAmount20_5_4];
+    var gatTotalAmount20_6 = [itemAmount20_6_1,itemAmount20_6_2,itemAmount20_6_3,itemAmount20_6_4];
+    
+    var gatTotalAmount30_1 = [itemAmount30_1_1,itemAmount30_1_2,itemAmount30_1_3,itemAmount30_1_4];
+    var gatTotalAmount30_2 = [itemAmount30_2_1,itemAmount30_2_2,itemAmount30_2_3,itemAmount30_2_4];
+    var gatTotalAmount30_3 = [itemAmount30_3_1,itemAmount30_3_2,itemAmount30_3_3,itemAmount30_3_4];
+    var gatTotalAmount30_4 = [itemAmount30_4_1,itemAmount30_4_2,itemAmount30_4_3,itemAmount30_4_4];
+    var gatTotalAmount30_5 = [itemAmount30_5_1,itemAmount30_5_2,itemAmount30_5_3,itemAmount30_5_4];
+    var gatTotalAmount30_6 = [itemAmount30_6_1,itemAmount30_6_2,itemAmount30_6_3,itemAmount30_6_4];
+    
+    var gatTotalAmount40_1 = [itemAmount40_1_1,itemAmount40_1_2,itemAmount40_1_3,itemAmount40_1_4];
+    var gatTotalAmount40_2 = [itemAmount40_2_1,itemAmount40_2_2,itemAmount40_2_3,itemAmount40_2_4];
+    var gatTotalAmount40_3 = [itemAmount40_3_1,itemAmount40_3_2,itemAmount40_3_3,itemAmount40_3_4];
+    var gatTotalAmount40_4 = [itemAmount40_4_1,itemAmount40_4_2,itemAmount40_4_3,itemAmount40_4_4];
+    var gatTotalAmount40_5 = [itemAmount40_5_1,itemAmount40_5_2,itemAmount40_5_3,itemAmount40_5_4];
+    var gatTotalAmount40_6 = [itemAmount40_6_1,itemAmount40_6_2,itemAmount40_6_3,itemAmount40_6_4];
+    
+    var totalAmount20 = [gatTotalAmount20_1,gatTotalAmount20_2,gatTotalAmount20_3,gatTotalAmount20_4,gatTotalAmount20_5,gatTotalAmount20_6];
+    var totalAmount30 = [gatTotalAmount30_1,gatTotalAmount30_2,gatTotalAmount30_3,gatTotalAmount30_4,gatTotalAmount30_5,gatTotalAmount30_6];
+    var totalAmount40 = [gatTotalAmount40_1,gatTotalAmount40_2,gatTotalAmount40_3,gatTotalAmount40_4,gatTotalAmount40_5,gatTotalAmount40_6];    
+    var totalAmount = [totalAmount20,totalAmount30,totalAmount40];
+    
+    //基礎材料名稱
+    var basisName20 = [item20_1,item20_2,item20_3,item20_4,item20_5,item20_6];
+    var basisName30 = [item30_1,item30_2,item30_3,item30_4,item30_5,item30_6];
+    var basisName40 = [item40_1,item40_2,item40_3,item40_4,item40_5,item40_6];
+    var basisName = [basisName20,basisName30,basisName40];
+    
+    //基礎材料數量
+    var getBasisAmount20_1 = [Amount20_1_1,Amount20_1_2,Amount20_1_3,Amount20_1_4];
+    var getBasisAmount20_2 = [Amount20_2_1,Amount20_2_2,Amount20_2_3,Amount20_2_4];
+    var getBasisAmount20_3 = [Amount20_3_1,Amount20_3_2,Amount20_3_3,Amount20_3_4];
+    var getBasisAmount20_4 = [Amount20_4_1,Amount20_4_2,Amount20_4_3,Amount20_4_4];
+    var getBasisAmount20_5 = [Amount20_5_1,Amount20_5_2,Amount20_5_3,Amount20_5_4];
+    var getBasisAmount20_6 = [Amount20_6_1,Amount20_6_2,Amount20_6_3,Amount20_6_4];
+    
+    var getBasisAmount30_1 = [Amount30_1_1,Amount30_1_2,Amount30_1_3,Amount30_1_4];
+    var getBasisAmount30_2 = [Amount30_2_1,Amount30_2_2,Amount30_2_3,Amount30_2_4];
+    var getBasisAmount30_3 = [Amount30_3_1,Amount30_3_2,Amount30_3_3,Amount30_3_4];
+    var getBasisAmount30_4 = [Amount30_4_1,Amount30_4_2,Amount30_4_3,Amount30_4_4];
+    var getBasisAmount30_5 = [Amount30_5_1,Amount30_5_2,Amount30_5_3,Amount30_5_4];
+    var getBasisAmount30_6 = [Amount30_6_1,Amount30_6_2,Amount30_6_3,Amount30_6_4];
+    
+    var getBasisAmount40_1 = [Amount40_1_1,Amount40_1_2,Amount40_1_3,Amount40_1_4];
+    var getBasisAmount40_2 = [Amount40_2_1,Amount40_2_2,Amount40_2_3,Amount40_2_4];
+    var getBasisAmount40_3 = [Amount40_3_1,Amount40_3_2,Amount40_3_3,Amount40_3_4];
+    var getBasisAmount40_4 = [Amount40_4_1,Amount40_4_2,Amount40_4_3,Amount40_4_4];
+    var getBasisAmount40_5 = [Amount40_5_1,Amount40_5_2,Amount40_5_3,Amount40_5_4];
+    var getBasisAmount40_6 = [Amount40_6_1,Amount40_6_2,Amount40_6_3,Amount40_6_4];
+    
+    var basisAmount20 = [getBasisAmount20_1,getBasisAmount20_2,getBasisAmount20_3,getBasisAmount20_4,getBasisAmount20_5,getBasisAmount20_6];
+    var basisAmount30 = [getBasisAmount30_1,getBasisAmount30_2,getBasisAmount30_3,getBasisAmount30_4,getBasisAmount30_5,getBasisAmount30_6];
+    var basisAmount40 = [getBasisAmount40_1,getBasisAmount40_2,getBasisAmount40_3,getBasisAmount40_4,getBasisAmount40_5,getBasisAmount40_6];
+    var basisAmount = [basisAmount20,basisAmount30,basisAmount40];
+    ///////////////////////////////////////////////////////
+    //table輸出
+    ///////////////////////////////////////////////////////
+    var table = "";
+    var titleName = "<tr><th>總材料</th><th>數量</th><th>基礎材料</th><th>數量</th></tr>";
+        
+    for(i = 0; i < 4 ; i++){
+        
+        var tableName = "";
+        var arrTotal = "";
+        tableName = "<caption>" + name[lv][tp][i] + "</caption>";
+
+        for(j = 0; j < basisName[lv][tp].length; j++){
+            
+            if(!totalName[lv][tp][j]){
+                totalName[lv][tp][j] = "";
+                totalAmount[lv][tp][i][j] = "";
+            }//如果沒有這例子則補空值
+            
+            arrTotal += 
+                "<tr><td>" + totalName[lv][tp][j] + "</td><td>" + totalAmount[lv][tp][i][j] + "</td>" + 
+                "<td>" + basisName[lv][tp][j] + "</td><td>" + basisAmount[lv][tp][i][j] + "</td></tr>";
+        }
+        table += "<table>" + tableName + titleName + arrTotal + "</table>";
+    }
+    document.getElementById("demo").innerHTML = table;
+}

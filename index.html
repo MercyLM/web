@@ -2,16 +2,43 @@
 <html lang = "zh-TW">
     <head>
         <meta charset = "utf-8">
-        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=0.75, user-scalable=no, minimum-scale=0.75, maximum-scale=0.75" />
         <title>MercyLM個人網站</title>
         
+        <!-- JS全域套用 -->
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type = "text/javascript" src = "myJS.js"></script>
+        <!-- CSS全域套用 -->
         <link rel = "stylesheet" href = "myCSS.css" type = "text/css">
+        <!-- icon套用 -->
         <link rel = "SHORTCUT ICON" href = "MercyLM.png" >
         <link rel = "apple-touch-icon" href = "MercyLM.png">
     </head>
     <body>
-        <div id = "body"></div>
+        <div class = "title">
+            <p>New Version: 2.0</p>
+            <p>New Update : 材料內容修正、系統優化</p>
+            <p>Note : 副手暫時移除，之後歸納為武器查詢區</p>
+            <p>Note : 系列裝就是對應部位前一階裝備</p>
+        </div>
+        <div class = "select">
+            <select id = "level" class = "">
+                <option id = "selectLevel" value = "">請選擇...</option>
+                <option id = "selectLevel" value = "0">Lv.20~23</option>
+                <option id = "selectLevel" value = "1">Lv.30~33</option>
+                <option id = "selectLevel" value = "2">Lv.40~43</option>
+            </select>
+            <select id = "type" class = "">
+                <option id = "selectType" value = "">請選擇...</option>
+                <option id = "selectType" value = "0">純力</option>
+                <option id = "selectType" value = "1">純智</option>
+                <option id = "selectType" value = "2">純敏</option>
+                <option id = "selectType" value = "3">力智</option>
+                <option id = "selectType" value = "4">力敏</option>
+                <option id = "selectType" value = "5">智敏</option>
+            </select>
+            <button onclick = "levelFunction()">查詢</button>
+        </div>
+        <div id = "demo"></div>
     </body>
-    <footer></footer>
-    <script type = "text/javascript" src = "myJS.js"></script>
 </html>
